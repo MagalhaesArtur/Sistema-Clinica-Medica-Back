@@ -12,32 +12,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entities.User;
 import com.example.demo.repositories.UserRepository;
+import com.example.demo.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
 
     @Autowired
-    private UserRepository repository;
+    private UserService userService;
 
     @GetMapping
     public List<User> findAll() {
-        return repository.findAll();
+        return userService.findAll();
     }
 
     @GetMapping(value = "/{id}")
     public User findUserById(@PathVariable Long id) {
-        return repository.findById(id).get();
+        return userService.findUserById(id);
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) throws Exception {
-        // System.out.println(user.getEmail());
-        User test = repository.findByEmail(user.getEmail());
-        if (test != null) {
-            throw new Exception("Email already exists");
-        } else {
-            return repository.save(user);
-        }
+    public User createUser(@RequestBody User user) {
+
+        return userService.createUser(user);
+
     }
 }
