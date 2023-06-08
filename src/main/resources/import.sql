@@ -7,3 +7,4 @@
 -- INSERT INTO tb_user(username, email, password) VALUES ('Ana', 'ana@gmail.com', '1234');
 INSERT INTO tb_user(username, email, password) VALUES ('Ana', 'ana@gmail.com', '$2a$10$zXAWTuEBdjorolAHahQV8eF19hYnqKGkh71jhJn7aGyDHW2MVSzn6');
 INSERT INTO tb_admin(username, email, password) VALUES ('ADM', 'ADM@gmail.com', '$2a$10$eH9.IsksiehkvZcWk2zgfuzVA29wPastZJ9.mbrgn.NwRkx4Bk.au');
+INSERT INTO tb_attendant(username, email, password) VALUES ('Atendente1', 'att1@gmail.com', '$2a$10$UGkXHacQ2AlxLfC8pFP7jOay0rvqTdg/r/qdtBgkSSgrtQ7M2Mkqi');

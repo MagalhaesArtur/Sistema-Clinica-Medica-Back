@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,6 +46,20 @@ public class UserService {
             return repository.save(userAux);
         }
 
+    }
+
+    public User deleteUserById(Long id) {
+        if (repository.count() == 0) {
+            throw new UnregistredEmail("Repositório vazio!");
+        } else {
+            Optional<User> userAux = repository.findById(id);
+            if (userAux.isPresent()) {
+                repository.deleteById(id);
+                return userAux.get();
+            } else {
+                throw new UnregistredEmail("Usuário não encontrado!");
+            }
+        }
     }
 
     public User login(@RequestBody User user) {

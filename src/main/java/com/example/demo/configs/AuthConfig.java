@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authorization.AuthorityAuthorizationManager;
+import org.springframework.security.authorization.AuthorizationManagers;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,9 +37,11 @@ public class AuthConfig {
                 .and().authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/login")
                 .permitAll().requestMatchers(HttpMethod.POST, "/register").permitAll()
-                .requestMatchers(HttpMethod.GET, "/users").hasAuthority("ROLE_ADMIN")
-                .requestMatchers(HttpMethod.POST, "/loginADM").permitAll()
-                .anyRequest().permitAll()
+                .requestMatchers(HttpMethod.GET, "/users/**").access(AuthorizationManagers.allOf(
+                        AuthorityAuthorizationManager.hasAuthority(("ROLE_ADMIN")),
+                        AuthorityAuthorizationManager.hasAuthority("ROLE_ATTENDANT")))
+                .requestMatchers(HttpMethod.DELETE, "/users/delete/**").hasAuthority("ROLE_ADMIN")
+                .anyRequest().authenticated()
                 .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
     }
 

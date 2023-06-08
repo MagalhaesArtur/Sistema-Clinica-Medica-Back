@@ -21,7 +21,7 @@ public class AdminService {
     @Autowired
     private PasswordEncoder encoder;
 
-    public Admin createUser(@RequestBody Admin admin) {
+    public Admin createAdmin(@RequestBody Admin admin) {
         Admin adminAux = new Admin();
 
         if (repository.findByEmail(admin.getEmail()) != null) {
