@@ -38,10 +38,14 @@ public class AuthConfig {
                 .requestMatchers(HttpMethod.POST, "/login")
                 .permitAll().requestMatchers(HttpMethod.POST, "/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users/**").access(AuthorizationManagers.allOf(
-                        AuthorityAuthorizationManager.hasAuthority(("ROLE_ADMIN")),
-                        AuthorityAuthorizationManager.hasAuthority("ROLE_ATTENDANT")))
-                .requestMatchers(HttpMethod.DELETE, "/users/delete/**").hasAuthority("ROLE_ADMIN")
-                .anyRequest().authenticated()
+                        AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN", "ROLE_ATTENDANT")))
+                .requestMatchers(HttpMethod.DELETE,
+                        "/users/delete/**")
+                .access(AuthorizationManagers.allOf(
+                        AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN", "ROLE_ATTENDANT")))
+
+                .requestMatchers(HttpMethod.GET, "/doctors/**").authenticated()
+                .anyRequest().permitAll()
                 .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
     }
 

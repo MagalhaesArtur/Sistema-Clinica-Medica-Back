@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.demo.repositories.AdminRepository;
+import com.example.demo.repositories.AttendantRepository;
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.TokenService;
 
@@ -25,6 +26,9 @@ public class FilterToken extends OncePerRequestFilter {
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private AttendantRepository attRepo;
 
     @Autowired
     private AdminRepository admRepo;
@@ -45,8 +49,14 @@ public class FilterToken extends OncePerRequestFilter {
                 var authorizarion = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(authorizarion);
-            } else {
+            } else if (admRepo.findByEmail(subject) != null) {
                 var user = this.admRepo.findByEmail(subject);
+
+                var authorizarion = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+
+                SecurityContextHolder.getContext().setAuthentication(authorizarion);
+            } else {
+                var user = this.attRepo.findByEmail(subject);
 
                 var authorizarion = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 

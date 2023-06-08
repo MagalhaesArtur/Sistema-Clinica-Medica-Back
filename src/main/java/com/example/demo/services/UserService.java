@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.example.demo.entities.Consulta;
 import com.example.demo.entities.User;
+import com.example.demo.repositories.ConsultaRepository;
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.errors.EmailAlreadyExists;
 import com.example.demo.services.errors.EntityNotFoundException;
@@ -21,9 +23,15 @@ public class UserService {
     private UserRepository repository;
 
     @Autowired
+    private ConsultaRepository consultaRepository;
+
+    @Autowired
+    private ConsultaService consultaService;
+
+    @Autowired
     private PasswordEncoder encoder;
 
-    public User findUserById(@PathVariable Long id) {
+    public User findUserById(Long id) {
         return repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Id not find " + id));
     }
@@ -32,7 +40,7 @@ public class UserService {
         return repository.findAll();
     }
 
-    public User createUser(@RequestBody User user) {
+    public User createUser(User user) {
         User userAux = new User();
 
         if (repository.findByEmail(user.getEmail()) != null) {
@@ -54,6 +62,10 @@ public class UserService {
         } else {
             Optional<User> userAux = repository.findById(id);
             if (userAux.isPresent()) {
+                List<Consulta> lista = consultaRepository.findByPatient(userAux.get());
+                for (Consulta consulta : lista) {
+                    consultaService.deleteById(consulta.getId());
+                }
                 repository.deleteById(id);
                 return userAux.get();
             } else {
