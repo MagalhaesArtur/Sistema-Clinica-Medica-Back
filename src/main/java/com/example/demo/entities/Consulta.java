@@ -2,7 +2,6 @@ package com.example.demo.entities;
 
 import java.util.Date;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +20,7 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
@@ -29,7 +28,7 @@ public class Consulta {
     @JoinColumn(name = "user_id")
     private User patient;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     // private String date;

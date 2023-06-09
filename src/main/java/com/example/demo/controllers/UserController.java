@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,12 +26,12 @@ public class UserController {
     }
 
     @GetMapping(value = "users/{id}")
-    public User findUserById(@PathVariable Long id) {
+    public User findUserById(@PathVariable UUID id) {
         return userService.findUserById(id);
     }
 
     @DeleteMapping(value = "users/delete/{id}")
-    public User deleteUserById(@PathVariable Long id) {
+    public User deleteUserById(@PathVariable UUID id) {
         return userService.deleteUserById(id);
     }
 

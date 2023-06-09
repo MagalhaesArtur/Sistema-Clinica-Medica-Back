@@ -2,11 +2,11 @@ package com.example.demo.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.entities.Consulta;
@@ -31,13 +31,20 @@ public class UserService {
     @Autowired
     private PasswordEncoder encoder;
 
-    public User findUserById(Long id) {
-        return repository.findById(id).orElseThrow(
+    public User findUserById(UUID id) {
+        User userAux = repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Id not find " + id));
+        userAux.setPassword(null);
+        return userAux;
     }
 
     public List<User> findAll() {
-        return repository.findAll();
+        List<User> usersAux = repository.findAll();
+
+        for (User user : usersAux) {
+            user.setPassword(null);
+        }
+        return usersAux;
     }
 
     public User createUser(User user) {
@@ -51,12 +58,14 @@ public class UserService {
             userAux.setPassword(encoder.encode(user.getPassword()));
             userAux.setUsername(user.getUsername());
 
-            return repository.save(userAux);
+            repository.save(userAux);
+            userAux.setPassword(null);
+            return userAux;
         }
 
     }
 
-    public User deleteUserById(Long id) {
+    public User deleteUserById(UUID id) {
         if (repository.count() == 0) {
             throw new UnregistredEmail("Repositório vazio!");
         } else {
