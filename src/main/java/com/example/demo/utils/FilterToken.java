@@ -34,7 +34,8 @@ public class FilterToken extends OncePerRequestFilter {
     private AdminRepository admRepo;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(HttpServletRequest request,
+            HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String token;
         var auth = request.getHeader("Authorization");
@@ -45,20 +46,22 @@ public class FilterToken extends OncePerRequestFilter {
 
             if (userRepo.findByEmail(subject) != null) {
                 var user = this.userRepo.findByEmail(subject);
-
-                var authorizarion = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                var authorizarion = new UsernamePasswordAuthenticationToken(user, null,
+                        user.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(authorizarion);
             } else if (admRepo.findByEmail(subject) != null) {
                 var user = this.admRepo.findByEmail(subject);
 
-                var authorizarion = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                var authorizarion = new UsernamePasswordAuthenticationToken(user, null,
+                        user.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(authorizarion);
             } else {
                 var user = this.attRepo.findByEmail(subject);
 
-                var authorizarion = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                var authorizarion = new UsernamePasswordAuthenticationToken(user, null,
+                        user.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(authorizarion);
             }

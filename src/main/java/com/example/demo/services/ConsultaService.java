@@ -86,7 +86,7 @@ public class ConsultaService {
                 consultaAux.get().setPatient(userAux);
                 return consultaAux.get();
             } else {
-                throw new EntityNotFoundException("Usuário não encontrado!");
+                throw new EntityNotFoundException("Consulta não encontrada!");
             }
         }
     }

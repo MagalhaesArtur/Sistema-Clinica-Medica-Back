@@ -35,8 +35,8 @@ public class AuthConfig {
         return code.headers().frameOptions().sameOrigin().and().csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/login")
-                .permitAll().requestMatchers(HttpMethod.POST, "/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/users/**").access(AuthorizationManagers.allOf(
                         AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN", "ROLE_ATTENDANT")))
                 .requestMatchers(HttpMethod.DELETE,

@@ -6,14 +6,27 @@ import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.demo.entities.Admin;
 import com.example.demo.entities.Attendant;
 import com.example.demo.entities.User;
 
 @Service
 public class TokenService {
+
+    public boolean validateToken(String token) throws JWTVerificationException {
+        DecodedJWT jwt = JWT.require(Algorithm.HMAC512("secret")).build().verify(token);
+        if (jwt instanceof DecodedJWT) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public String generateTokenUser(User user) {
         return JWT.create().withSubject(user.getEmail()).withClaim("isADM", false).withClaim("isATT", false)
+                .withClaim("id", user.getId().toString())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 600_000))
                 .sign(Algorithm.HMAC512("secret"));
     }
