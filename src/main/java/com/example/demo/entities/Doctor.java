@@ -14,6 +14,7 @@ public class Doctor {
     private Long id;
     private String name;
     private String specialty;
+    private String photoURL;
 
     public Long getId() {
         return id;
@@ -37,6 +38,14 @@ public class Doctor {
 
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
     }
 
 }

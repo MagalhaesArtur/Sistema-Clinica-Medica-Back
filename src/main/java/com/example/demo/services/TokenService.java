@@ -27,20 +27,20 @@ public class TokenService {
     public String generateTokenUser(User user) {
         return JWT.create().withSubject(user.getEmail()).withClaim("isADM", false).withClaim("isATT", false)
                 .withClaim("id", user.getId().toString())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 600_000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1200000))
                 .sign(Algorithm.HMAC512("secret"));
     }
 
     public String generateTokenAdm(Admin adm) {
         return JWT.create().withSubject(adm.getEmail()).withClaim("isADM", true)
-                .withExpiresAt(new Date(System.currentTimeMillis() + 600_000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1200000))
                 .sign(Algorithm.HMAC512("secret"));
     }
 
     public String generateTokenAtt(Attendant att) {
 
         return JWT.create().withSubject(att.getEmail()).withClaim("isADM", false).withClaim("isATT", true)
-                .withExpiresAt(new Date(System.currentTimeMillis() + 600_000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1200000))
                 .sign(Algorithm.HMAC512("secret"));
     }
 

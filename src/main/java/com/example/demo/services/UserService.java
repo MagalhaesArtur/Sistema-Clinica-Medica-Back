@@ -32,9 +32,12 @@ public class UserService {
     private PasswordEncoder encoder;
 
     public User findUserById(UUID id) {
-        User userAux = repository.findById(id).orElseThrow(
+        User user = repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Id not find " + id));
-        userAux.setPassword(null);
+        User userAux = new User();
+        userAux.setEmail(user.getEmail());
+        userAux.setId(user.getId());
+        userAux.setUsername(user.getUsername());
         return userAux;
     }
 

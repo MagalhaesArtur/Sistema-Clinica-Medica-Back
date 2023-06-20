@@ -38,10 +38,16 @@ public class ConsultaController {
         return service.findByDay(date);
     }
 
-    @GetMapping("/consultas/user")
+    @PostMapping("/consultas/user")
     public List<Consulta> findByUserId(@RequestBody JsonUUID id) {
-        UUID uuid = id.id;
-        return service.findByUserId(uuid);
+        try {
+
+            UUID uuidd = UUID.fromString(id.id);
+            return service.findByUserId(uuidd);
+        } catch (Exception e) {
+            System.out.println(RequestBody.class);
+            throw e;
+        }
     }
 
     @PostMapping("/createConsulta")
