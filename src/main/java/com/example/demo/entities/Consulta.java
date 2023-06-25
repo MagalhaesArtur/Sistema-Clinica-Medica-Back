@@ -30,7 +30,13 @@ public class Consulta {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
+    private Boolean isConfirmed;
+
     // private String date;
+
+    public Boolean getIsConfirmed() {
+        return isConfirmed;
+    }
 
     public Long getId() {
         return id;
@@ -62,6 +68,10 @@ public class Consulta {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public void setIsConfirmed(Boolean isConfirmed) {
+        this.isConfirmed = isConfirmed;
     }
 
 }

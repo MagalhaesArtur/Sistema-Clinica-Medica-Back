@@ -14,4 +14,4 @@ INSERT INTO tb_attendant(username, email, password) VALUES ('Atendente1', 'att1@
 INSERT INTO tb_doctor(name, specialty, photoURL) VALUES ('Dr. Ricardo Santiago', 'Cardiologia', 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
 INSERT INTO tb_doctor(name, specialty, photoURL) VALUES ('Dra. Ana Valle', 'Dermatologia','https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
 INSERT INTO tb_doctor(name, specialty, photoURL) VALUES ('Dr. Bruno Rodrigues', 'Fisioterapia','https://images.unsplash.com/photo-1622253694242-abeb37a33e97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80');
-INSERT INTO tb_query(doctor_id, user_id, date) VALUES (1, '8e0b352f-9adf-4157-96bb-ea0ab3362774', '2023-06-08 08:00:00.0000000')
+INSERT INTO tb_query(doctor_id, user_id, date, is_Confirmed) VALUES (1, '8e0b352f-9adf-4157-96bb-ea0ab3362774', '2023-06-08 08:00:00.0000000', False)
