@@ -14,7 +14,9 @@ import com.example.demo.entities.User;
 
 @Service
 public class TokenService {
+    private Integer expireToken = 1200000;
 
+    // 1200000
     public boolean validateToken(String token) throws JWTVerificationException {
         DecodedJWT jwt = JWT.require(Algorithm.HMAC512("secret")).build().verify(token);
         if (jwt instanceof DecodedJWT) {
@@ -27,20 +29,20 @@ public class TokenService {
     public String generateTokenUser(User user) {
         return JWT.create().withSubject(user.getEmail()).withClaim("isADM", false).withClaim("isATT", false)
                 .withClaim("id", user.getId().toString())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1200000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + expireToken))
                 .sign(Algorithm.HMAC512("secret"));
     }
 
     public String generateTokenAdm(Admin adm) {
         return JWT.create().withSubject(adm.getEmail()).withClaim("isADM", true)
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1200000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + expireToken))
                 .sign(Algorithm.HMAC512("secret"));
     }
 
     public String generateTokenAtt(Attendant att) {
 
         return JWT.create().withSubject(att.getEmail()).withClaim("isADM", false).withClaim("isATT", true)
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1200000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + expireToken))
                 .sign(Algorithm.HMAC512("secret"));
     }
 

@@ -94,7 +94,9 @@ public class ConsultaService {
     public Consulta createConsulta(ConsultaMod consulta) throws ParseException {
         Consulta consultaAux = new Consulta();
         String ano = consulta.date.ano;
-        String mes = consulta.date.mes;
+        Integer aux = Integer.parseInt(consulta.date.mes) + 1;
+        String mes = aux.toString();
+
         String dia = consulta.date.dia;
         String horario = consulta.date.horario;
 
@@ -102,10 +104,7 @@ public class ConsultaService {
                 new SimpleDateFormat("yyyy/MM/dd HH:mm")
                         .parse(ano + "/" + mes + "/" + dia + " " + horario));
 
-        GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("Brazil/East"));
-        calendar.setTimeInMillis(1686222000000L);
-        System.out.println(calendar.getTime());
-
+        consultaAux.setIsConfirmed(true);
         consultaAux.setDoctor(docService.findDocById(consulta.doctor_id));
         consultaAux.setPatient(userService.findUserById(consulta.patient_id));
 

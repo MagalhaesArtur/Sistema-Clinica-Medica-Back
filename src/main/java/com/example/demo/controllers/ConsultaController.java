@@ -45,13 +45,13 @@ public class ConsultaController {
             UUID uuidd = UUID.fromString(id.id);
             return service.findByUserId(uuidd);
         } catch (Exception e) {
-            System.out.println(RequestBody.class);
             throw e;
         }
     }
 
     @PostMapping("/createConsulta")
     public Consulta create(@RequestBody ConsultaMod consulta) throws ParseException {
+
         return service.createConsulta(consulta);
     }
 
