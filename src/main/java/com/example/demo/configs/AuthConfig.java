@@ -40,10 +40,11 @@ public class AuthConfig {
                 .requestMatchers(HttpMethod.GET, "/users/**").access(AuthorizationManagers.allOf(
                         AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN", "ROLE_ATTENDANT")))
                 .requestMatchers(HttpMethod.DELETE,
-                        "/users/delete/**")
+                        "/delete/user/")
+                // .permitAll()
                 .access(AuthorizationManagers.allOf(
-                        AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN", "ROLE_ATTENDANT")))
-
+                        AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN",
+                                "ROLE_ATTENDANT")))
                 .requestMatchers(HttpMethod.GET, "/doctors/**").authenticated()
                 .requestMatchers(HttpMethod.POST, "/createConsulta").authenticated()
                 .anyRequest().permitAll()

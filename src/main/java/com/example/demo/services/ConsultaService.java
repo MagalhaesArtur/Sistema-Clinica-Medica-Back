@@ -104,7 +104,7 @@ public class ConsultaService {
                 new SimpleDateFormat("yyyy/MM/dd HH:mm")
                         .parse(ano + "/" + mes + "/" + dia + " " + horario));
 
-        consultaAux.setIsConfirmed(true);
+        consultaAux.setIsConfirmed(false);
         consultaAux.setDoctor(docService.findDocById(consulta.doctor_id));
         consultaAux.setPatient(userService.findUserById(consulta.patient_id));
 

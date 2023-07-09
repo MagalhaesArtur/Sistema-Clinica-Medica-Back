@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.JsonUUID;
 import com.example.demo.entities.User;
 import com.example.demo.services.UserService;
 
@@ -30,14 +31,14 @@ public class UserController {
         return userService.findUserById(id);
     }
 
-    @DeleteMapping(value = "users/delete/{id}")
-    public User deleteUserById(@PathVariable UUID id) {
-        return userService.deleteUserById(id);
+    @DeleteMapping(value = "/delete/user")
+    public User deleteUserById(@RequestBody JsonUUID id) {
+        UUID uuidd = UUID.fromString(id.id);
+        return userService.deleteUserById(uuidd);
     }
 
     @PostMapping("/register")
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
-
 }

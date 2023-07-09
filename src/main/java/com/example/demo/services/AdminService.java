@@ -10,7 +10,6 @@ import com.example.demo.entities.Admin;
 import com.example.demo.repositories.AdminRepository;
 import com.example.demo.services.errors.EmailAlreadyExists;
 import com.example.demo.services.errors.UnregistredEmail;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
