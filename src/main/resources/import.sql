@@ -1,8 +1,8 @@
 
 
 
-INSERT INTO tb_user(id, username, email, password) VALUES ('8e0b352f-9adf-4157-96bb-ea0ab3362774','Ana', 'ana@gmail.com', '$2a$10$WGhhrNq9dd4ae7L.n9X4XeU8iKroX71jCw/6phXwTjPqFyduh0tAy');
-INSERT INTO tb_user(id, username, email, password) VALUES ('df474f9d-3228-45bc-8ce9-1d5191fb2c2f','João', 'joao@gmail.com', '$2a$10$9UCaaxx.4mScKZovEyszIuNbhHab5/XolgMXeBqdIdTl/u6Dbcqgu');
+INSERT INTO tb_user(id, username, email, password) VALUES ('8e0b352f-9adf-4157-96bb-ea0ab3362774','Ana', 'ana@gmail.com', '$2a$10$a6ianqQkC5HGz8iptGUyqOVqe4Cltu3z14zq5sqwhoK/sflaQ7ZUe');
+INSERT INTO tb_user(id, username, email, password) VALUES ('df474f9d-3228-45bc-8ce9-1d5191fb2c2f','João', 'joao@gmail.com', '$2a$10$GPTOFymybykXvfoJ.USJuOmQhAIE6UK0kC7dYUkfWaT5wRwD9GG0y');
 
 INSERT INTO tb_admin(username, email, password) VALUES ('ADM', 'ADM@gmail.com', '$2a$10$eH9.IsksiehkvZcWk2zgfuzVA29wPastZJ9.mbrgn.NwRkx4Bk.au');
 -- INSERT INTO tb_attendant(username, email, password) VALUES ('Atendente1', 'att1@gmail.com', '$2a$10$UGkXHacQ2AlxLfC8pFP7jOay0rvqTdg/r/qdtBgkSSgrtQ7M2Mkqi');
