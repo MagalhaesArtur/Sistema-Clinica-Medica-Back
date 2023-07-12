@@ -47,6 +47,9 @@ public class AuthConfig {
                                 "ROLE_ATTENDANT")))
                 .requestMatchers(HttpMethod.GET, "/doctors/**").authenticated()
                 .requestMatchers(HttpMethod.POST, "/createConsulta").authenticated()
+                .requestMatchers(HttpMethod.PUT, "/confirmConsulta/**").access(AuthorizationManagers.allOf(
+                        AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN",
+                                "ROLE_ATTENDANT")))
                 .anyRequest().permitAll()
                 .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
     }

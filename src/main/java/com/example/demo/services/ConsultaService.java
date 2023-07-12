@@ -50,6 +50,10 @@ public class ConsultaService {
         return setPasswordToNull(repository.findAll());
     }
 
+    public Consulta findByID(Long id) {
+        return repository.findById(id).get();
+    }
+
     public List<Consulta> findByDocId(Long id) {
         Optional<Doctor> doc = docRepo.findById(id);
 
@@ -88,6 +92,17 @@ public class ConsultaService {
             } else {
                 throw new EntityNotFoundException("Consulta não encontrada!");
             }
+        }
+    }
+
+    public Boolean confirmConsulta(Long id) {
+        if (repository.count() == 0) {
+            throw new EntityNotFoundException("Repositório vazio!");
+        } else {
+            Consulta consultaAux = findByID(id);
+            consultaAux.setIsConfirmed(true);
+            repository.save(consultaAux);
+            return true;
         }
     }
 
