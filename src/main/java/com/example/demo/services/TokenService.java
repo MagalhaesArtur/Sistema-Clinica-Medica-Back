@@ -14,7 +14,7 @@ import com.example.demo.entities.User;
 
 @Service
 public class TokenService {
-    private Integer expireToken = 12000;
+    private Integer expireToken = 1200000;
 
     // 1200000
     public boolean validateToken(String token) throws JWTVerificationException {
