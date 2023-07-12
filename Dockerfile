@@ -1,4 +1,4 @@
-FROM maven:4.0.0-openjdk-20 AS build
+FROM maven:3.9.2-openjdk-20 AS build
 VOLUME /tmp
 # COPY target/*.jar app.jar
 COPY . .
