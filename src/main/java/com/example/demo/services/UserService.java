@@ -62,7 +62,7 @@ public class UserService {
             userAux.setUsername(user.getUsername());
 
             repository.save(userAux);
-            userAux.setPassword(null);
+            // userAux.setPassword(null);
             return userAux;
         }
 
