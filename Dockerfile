@@ -1,5 +1,9 @@
-FROM eclipse-temurin:20-jdk-alpine
+FROM maven:4.0.0-openjdk-20 AS build
 VOLUME /tmp
-COPY target/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+# COPY target/*.jar app.jar
+COPY . .
+RUN mvn clean package -DskipTests
+FROM openjdk:20-jdk-slim
+COPY --from=build /target/ demo-0.0.1-SNAPSHOT.jar demo.jar
 EXPOSE 8080
+ENTRYPOINT ["java","-jar","demo.jar"]
