@@ -33,6 +33,7 @@ public class FilterToken extends OncePerRequestFilter {
     @Autowired
     private AdminRepository admRepo;
 
+    // Filtrando o token para coletar somente a parte que importa
     @Override
     protected void doFilterInternal(HttpServletRequest request,
             HttpServletResponse response, FilterChain filterChain)

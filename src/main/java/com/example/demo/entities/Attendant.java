@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
+// Entidade atendente e seus métodos/atributos
 @Table(name = "tb_attendant")
 public class Attendant implements UserDetails {
 

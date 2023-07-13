@@ -14,6 +14,7 @@ public class AdminController {
     @Autowired
     private AdminService admService;
 
+    // Retorna uma lista com todos os administradores
     @GetMapping("/usersADM")
     public List<Admin> findAll() {
         return admService.findAll();

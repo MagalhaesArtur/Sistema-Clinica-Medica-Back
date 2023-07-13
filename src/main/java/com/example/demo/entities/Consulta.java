@@ -14,6 +14,7 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "tb_query")
+// Entidade Consulta e seus métodos/atributos
 public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

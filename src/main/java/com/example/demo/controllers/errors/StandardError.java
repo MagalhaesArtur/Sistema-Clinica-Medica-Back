@@ -3,6 +3,7 @@ package com.example.demo.controllers.errors;
 import java.io.Serializable;
 import java.time.Instant;
 
+// Criando um tipo de erro padrão na aplicação
 public class StandardError implements Serializable {
     private Instant timestamp;
     private Integer status;

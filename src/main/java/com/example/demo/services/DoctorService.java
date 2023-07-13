@@ -16,10 +16,12 @@ public class DoctorService {
     @Autowired
     private DoctorRepository repository;
 
+    // Retorna todos os médicos
     public List<Doctor> findAll() {
         return repository.findAll();
     }
 
+    // Retorna uma médico pelo ID
     public Doctor findDocById(Long id) {
         Optional<Doctor> docAux = repository.findById(id);
         if (docAux.isPresent()) {

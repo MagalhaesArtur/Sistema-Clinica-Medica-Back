@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_user")
+// Entidade usuário e seus métodos/atributos
 public class User implements UserDetails {
 
     @Id

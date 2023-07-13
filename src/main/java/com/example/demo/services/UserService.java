@@ -31,6 +31,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder encoder;
 
+    // Retorna um usuário pelo ID
     public User findUserById(UUID id) {
         User user = repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Id not find " + id));
@@ -41,6 +42,7 @@ public class UserService {
         return userAux;
     }
 
+    // Retorna uma lista com todos os usuários
     public List<User> findAll() {
         List<User> usersAux = repository.findAll();
 
@@ -50,6 +52,7 @@ public class UserService {
         return usersAux;
     }
 
+    // Cria um usuário
     public User createUser(User user) {
         User userAux = new User();
 
@@ -68,6 +71,7 @@ public class UserService {
 
     }
 
+    // Deleta um usuário pelo ID
     public User deleteUserById(UUID id) {
         if (repository.count() == 0) {
             throw new UnregistredEmail("Repositório vazio!");
@@ -86,6 +90,7 @@ public class UserService {
         }
     }
 
+    // Faz o login de um usuário
     public User login(@RequestBody User user) {
         User userAux = repository.findByEmail(user.getEmail());
 

@@ -24,21 +24,25 @@ public class ConsultaController {
     @Autowired
     private ConsultaService service;
 
+    // Retorna todas as consultas
     @GetMapping("/consultas")
     public List<Consulta> findAll() {
         return service.findAll();
     }
 
+    // Retona todas as consultas de um certo médico
     @GetMapping("/consultas/doc/{id}")
     public List<Consulta> findByDocId(@PathVariable Long id) {
         return service.findByDocId(id);
     }
 
+    // Retorna todas as consultas de um certo dia
     @GetMapping("/consultas/day")
     public List<Consulta> findByDay(@RequestBody PersonalDate date) throws ParseException {
         return service.findByDay(date);
     }
 
+    // Retorna todas as consultas de um certo usuário
     @PostMapping("/consultas/user")
     public List<Consulta> findByUserId(@RequestBody JsonUUID id) {
         try {
@@ -49,6 +53,7 @@ public class ConsultaController {
         }
     }
 
+    // Cria uma consulta
     @PostMapping("/createConsulta")
     public Consulta create(@RequestBody ConsultaMod consulta) throws ParseException {
 
@@ -56,12 +61,14 @@ public class ConsultaController {
 
     }
 
+    // Confima uma consulta
     @GetMapping("/confirmConsulta/{id}")
     public Boolean confirmConsulta(@PathVariable Long id) {
 
         return service.confirmConsulta(id);
     }
 
+    // Deleta uma consulta
     @DeleteMapping("/deleteConsulta/{id}")
     public Consulta delete(@PathVariable Long id) {
         return service.deleteById(id);

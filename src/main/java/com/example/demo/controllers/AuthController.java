@@ -40,6 +40,7 @@ public class AuthController {
     @Autowired
     private AdminRepository admRepo;
 
+    // Retorna True se o token fornecido estiver válido
     @PostMapping("/auth")
     public boolean authToken(@RequestBody JsonToken token) {
         try {
@@ -53,6 +54,7 @@ public class AuthController {
         }
     }
 
+    // Faz a operação de login e trata alguns casos de erro.
     @PostMapping("/login")
     public UserAndToken login(@RequestBody Login login) {
         User userAux = userRepo.findByEmail(login.email());

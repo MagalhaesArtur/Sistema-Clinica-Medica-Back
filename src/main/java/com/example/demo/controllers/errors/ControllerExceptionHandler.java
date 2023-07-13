@@ -14,7 +14,11 @@ import com.example.demo.services.errors.UnregistredEmail;
 import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
+
+// Classe para criar erros personalizados
 public class ControllerExceptionHandler {
+
+    // Erro de Entidade não encontrada (repositórtio vazio)
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException e, HttpServletRequest request) {
         StandardError err = new StandardError();
@@ -26,6 +30,7 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(err);
     }
 
+    // Erro de email já existente
     @ExceptionHandler(EmailAlreadyExists.class)
     public ResponseEntity<StandardError> emailAlreadyExists(EmailAlreadyExists e, HttpServletRequest request) {
         StandardError err = new StandardError();
@@ -37,6 +42,7 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(err);
     }
 
+    // Erro de email não cadastrado
     @ExceptionHandler(UnregistredEmail.class)
     public ResponseEntity<StandardError> unregistredEmail(UnregistredEmail e, HttpServletRequest request) {
         StandardError err = new StandardError();

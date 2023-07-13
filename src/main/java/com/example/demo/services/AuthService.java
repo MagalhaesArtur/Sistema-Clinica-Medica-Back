@@ -12,6 +12,7 @@ import com.example.demo.repositories.AdminRepository;
 import com.example.demo.repositories.AttendantRepository;
 import com.example.demo.repositories.UserRepository;
 
+// Serviço de autenticação
 @Service
 public class AuthService implements UserDetailsService {
     @Autowired
@@ -23,6 +24,7 @@ public class AuthService implements UserDetailsService {
     @Autowired
     private AttendantRepository attRepo;
 
+    // Verificando de quem quer fazer login é usuário/atendente ou admin
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (userRepo.findByEmail(username) instanceof User) {

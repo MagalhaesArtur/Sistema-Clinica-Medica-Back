@@ -18,44 +18,48 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.example.demo.utils.FilterToken;
 
+// Configurações de Autenticação (Quem pode/não pode acessar Endpoints)
 @Configuration
 @EnableWebSecurity
 public class AuthConfig {
 
-    @Autowired
-    private FilterToken filter;
+        @Autowired
+        private FilterToken filter;
 
-    @Bean
-    public AuthenticationManager authManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
+        @Bean
+        public AuthenticationManager authManager(AuthenticationConfiguration authConfig) throws Exception {
+                return authConfig.getAuthenticationManager();
+        }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity code) throws Exception {
-        return code.headers().frameOptions().sameOrigin().and().csrf().disable().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/register").permitAll()
-                .requestMatchers(HttpMethod.GET, "/users/**").access(AuthorizationManagers.allOf(
-                        AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN", "ROLE_ATTENDANT")))
-                .requestMatchers(HttpMethod.DELETE,
-                        "/delete/user/")
-                // .permitAll()
-                .access(AuthorizationManagers.allOf(
-                        AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN",
-                                "ROLE_ATTENDANT")))
-                .requestMatchers(HttpMethod.GET, "/doctors/**").authenticated()
-                .requestMatchers(HttpMethod.POST, "/createConsulta").authenticated()
-                .requestMatchers(HttpMethod.PUT, "/confirmConsulta/**").access(AuthorizationManagers.allOf(
-                        AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN",
-                                "ROLE_ATTENDANT")))
-                .anyRequest().permitAll()
-                .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
-    }
+        // Adicionando as restrições de permissão
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity code) throws Exception {
+                return code.headers().frameOptions().sameOrigin().and().csrf().disable().sessionManagement()
+                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                                .and().authorizeHttpRequests()
+                                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/register").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/users/**").access(AuthorizationManagers.allOf(
+                                                AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN",
+                                                                "ROLE_ATTENDANT")))
+                                .requestMatchers(HttpMethod.DELETE,
+                                                "/delete/user/")
+                                // .permitAll()
+                                .access(AuthorizationManagers.allOf(
+                                                AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN",
+                                                                "ROLE_ATTENDANT")))
+                                .requestMatchers(HttpMethod.GET, "/doctors/**").authenticated()
+                                .requestMatchers(HttpMethod.POST, "/createConsulta").authenticated()
+                                .requestMatchers(HttpMethod.PUT, "/confirmConsulta/**")
+                                .access(AuthorizationManagers.allOf(
+                                                AuthorityAuthorizationManager.hasAnyAuthority("ROLE_ADMIN",
+                                                                "ROLE_ATTENDANT")))
+                                .anyRequest().permitAll()
+                                .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
+        }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 }

@@ -16,11 +16,13 @@ public class DoctorController {
     @Autowired
     private DoctorService docService;
 
+    // Retorna uma lista com todos os médicos
     @GetMapping("/doctors")
     public List<Doctor> findAll() {
         return docService.findAll();
     }
 
+    // Retorna um médico com um certo ID
     @GetMapping("/doctors/{id}")
     public List<Doctor> findDocById(@PathVariable Long id) {
         return docService.findAll();

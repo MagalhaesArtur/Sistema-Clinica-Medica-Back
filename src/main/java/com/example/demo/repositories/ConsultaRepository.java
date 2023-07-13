@@ -11,6 +11,8 @@ import com.example.demo.entities.Consulta;
 import com.example.demo.entities.Doctor;
 import com.example.demo.entities.User;
 
+// Repositório de Consultas
+
 public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
     List<Consulta> findByDoctor(Doctor doc);
 

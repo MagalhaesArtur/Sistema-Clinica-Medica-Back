@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_admin")
+// Entidade ADMIN e seus métodos/atributos
 public class Admin implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -20,6 +20,7 @@ public class AdminService {
     @Autowired
     private PasswordEncoder encoder;
 
+    // Cria um admin
     public Admin createAdmin(@RequestBody Admin admin) {
         Admin adminAux = new Admin();
 
@@ -36,10 +37,12 @@ public class AdminService {
 
     }
 
+    // Retorna a lista com todos os ADMIN
     public List<Admin> findAll() {
         return repository.findAll();
     }
 
+    // Faz o login do Admin
     public Admin login(@RequestBody Admin admin) {
         Admin userAux = repository.findByEmail(admin.getEmail());
 

@@ -35,6 +35,7 @@ public class ConsultaService {
     @Autowired
     private UserService userService;
 
+    // Função auxiliar que proteje as senhas dos usuários nas transições de dados
     public List<Consulta> setPasswordToNull(List<Consulta> lista) {
         List<Consulta> listaAux = new ArrayList();
         for (Consulta consulta : lista) {
@@ -46,14 +47,17 @@ public class ConsultaService {
         return listaAux;
     }
 
+    // Retorna todas as consultas
     public List<Consulta> findAll() {
         return setPasswordToNull(repository.findAll());
     }
 
+    // Retorna uma consulta pelo ID
     public Consulta findByID(Long id) {
         return repository.findById(id).get();
     }
 
+    // Retorna uma lista de consultas associadas ao certo médico
     public List<Consulta> findByDocId(Long id) {
         Optional<Doctor> doc = docRepo.findById(id);
 
@@ -66,6 +70,7 @@ public class ConsultaService {
         }
     }
 
+    // Retorna uma lista de consultas de um certo usuário
     public List<Consulta> findByUserId(UUID id) {
         User user = userService.findUserById(id);
 
@@ -78,6 +83,7 @@ public class ConsultaService {
         }
     }
 
+    // Deleta uma consulta
     public Consulta deleteById(Long id) {
         if (repository.count() == 0) {
             throw new EntityNotFoundException("Repositório vazio!");
@@ -95,6 +101,7 @@ public class ConsultaService {
         }
     }
 
+    // Confirma uma consulta
     public Boolean confirmConsulta(Long id) {
         if (repository.count() == 0) {
             throw new EntityNotFoundException("Repositório vazio!");
@@ -106,6 +113,7 @@ public class ConsultaService {
         }
     }
 
+    // Cria uma consulta
     public Consulta createConsulta(ConsultaMod consulta) throws ParseException {
         Consulta consultaAux = new Consulta();
         String ano = consulta.date.ano;
@@ -127,6 +135,7 @@ public class ConsultaService {
 
     }
 
+    // Retorna uma lista de consultas de um certo dia
     public List<Consulta> findByDay(PersonalDate date) throws ParseException {
         String ano = date.ano;
         String mes = date.mes;

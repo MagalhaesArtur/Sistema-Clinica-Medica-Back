@@ -8,6 +8,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_doctor")
+// Entidade Doctor e seus métodos/atributos
+
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

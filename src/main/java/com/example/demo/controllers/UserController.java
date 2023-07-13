@@ -21,22 +21,26 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // Retorna todos os usuários
     @GetMapping("/users")
     public List<User> findAll() {
         return userService.findAll();
     }
 
+    // Retorna um usuário pelo ID
     @GetMapping(value = "users/{id}")
     public User findUserById(@PathVariable UUID id) {
         return userService.findUserById(id);
     }
 
+    // Deleta um usuário
     @DeleteMapping(value = "/delete/user")
     public User deleteUserById(@RequestBody JsonUUID id) {
         UUID uuidd = UUID.fromString(id.id);
         return userService.deleteUserById(uuidd);
     }
 
+    // Registra um usuário
     @PostMapping("/register")
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);

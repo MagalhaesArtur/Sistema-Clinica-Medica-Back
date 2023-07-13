@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+// Formato que retorna um usuário e suas informações com relação ao token
 public class UserAndToken<T> {
     T user;
     String token;
